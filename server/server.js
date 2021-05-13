@@ -6,7 +6,7 @@ import Shopify, { ApiVersion } from "@shopify/shopify-api";
 import Koa from "koa";
 import next from "next";
 import Router from "koa-router";
-const getSubscriptionUrl = require("./getSubscriptionUrl");
+// const getSubscriptionUrl = require("./getSubscriptionUrl");
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8081;
@@ -58,14 +58,15 @@ app.prepare().then(async () => {
         }
 
         // Redirect to app with shop parameter upon auth
-        // ctx.redirect(`/?shop=${shop}`);
-        const returnUrl = `https://${Shopify.Context.HOST_NAME}?shop=${shop}`;
-        const subscriptionUrl = await getSubscriptionUrl(
-          accessToken,
-          shop,
-          returnUrl
-        );
-        ctx.redirect(subscriptionUrl);
+        ctx.redirect(`/?shop=${shop}`);
+        // サブスクにする場合
+        // const returnUrl = `https://${Shopify.Context.HOST_NAME}?shop=${shop}`;
+        // const subscriptionUrl = await getSubscriptionUrl(
+        //   accessToken,
+        //   shop,
+        //   returnUrl
+        // );
+        // ctx.redirect(subscriptionUrl);
       },
     })
   );
